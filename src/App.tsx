@@ -319,7 +319,7 @@ function About() {
             </div>
             <div className="mt-12 pt-12 border-t border-gray-100 grid grid-cols-2 gap-8">
               <div>
-                <span className="block text-3xl font-serif text-gold mb-1">10+</span>
+                <span className="block text-3xl font-serif text-gold mb-1">20+</span>
                 <span className="text-xs uppercase tracking-widest text-charcoal/50 font-semibold">Years Experience</span>
               </div>
               <div>
