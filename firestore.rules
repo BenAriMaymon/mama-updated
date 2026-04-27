@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper: Validate ID
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Helper: Validate Lead
+    function isValidLead(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'message', 'createdAt', 'language'])
+        && data.keys().size() == 6
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 200
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 200
+        && data.phone is string && data.phone.size() > 0 && data.phone.size() <= 50
+        && data.message is string && data.message.size() > 0 && data.message.size() <= 5000
+        && data.language is string && data.language.size() > 0 && data.language.size() <= 10
+        && data.createdAt == request.time;
+    }
+
+    match /leads/{leadId} {
+      // Allow public creation of leads with strict validation
+      allow create: if isValidId(leadId) && isValidLead(request.resource.data);
+      
+      // Admin access (manual lookup in console is safer for now)
+      // If we had an admin role, we'd add it here.
+      allow read, update, delete: if false;
+    }
+  }
+}
