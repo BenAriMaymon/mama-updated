@@ -18,12 +18,12 @@ import {
   Languages, 
   Landmark, 
   ScrollText,
+  MessageCircle,
   Menu,
   X
 } from 'lucide-react';
 import { Language, Content } from './types';
 import { contentData } from './content';
-import { submitLead } from './lib/firebase';
 
 const LanguageContext = createContext<{
   language: Language;
@@ -537,6 +537,63 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const primaryContact = content.contact.details[0];
+  const mailSubmitLabel = language === 'he'
+    ? 'שליחה במייל'
+    : language === 'hu'
+      ? 'Küldés e-mailben'
+      : 'Send by mail';
+  const whatsappQuickSendLabel = language === 'he'
+    ? 'שליחה מהירה ב-WhatsApp'
+    : language === 'hu'
+      ? 'Gyors küldés WhatsAppon'
+      : 'WhatsApp quick send';
+
+  const buildInquiryText = () => [
+    `Name: ${formData.name || '-'}`,
+    `Email: ${formData.email || '-'}`,
+    `Phone: ${formData.phone || '-'}`,
+    '',
+    formData.message || '-',
+  ].join('\n');
+
+  const buildWhatsAppUrl = () => {
+    if (!primaryContact?.phone) return null;
+
+    const phoneDigits = primaryContact.phone.replace(/\D/g, '');
+    const normalizedPhone = phoneDigits.startsWith('0')
+      ? `972${phoneDigits.slice(1)}`
+      : phoneDigits;
+
+    const message = encodeURIComponent([
+      `Hello ${primaryContact.name},`,
+      '',
+      `My name is ${formData.name || '-'}`,
+      `Email: ${formData.email || '-'}`,
+      `Phone: ${formData.phone || '-'}`,
+      '',
+      formData.message || '-',
+    ].join('\n'));
+
+    return `https://wa.me/${normalizedPhone}?text=${message}`;
+  };
+
+  const openWhatsAppQuickSend = () => {
+    const whatsappUrl = buildWhatsAppUrl();
+    if (whatsappUrl) {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const buildNetlifyFormBody = () => new URLSearchParams({
+    'form-name': 'contact',
+    'bot-field': '',
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    message: formData.message,
+    language,
+  }).toString();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -544,16 +601,20 @@ function Contact() {
     setError(null);
 
     try {
-      await submitLead({
-        ...formData,
-        language
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: buildNetlifyFormBody(),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit contact form');
+      }
+
       setIsSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSuccess(false), 5000);
     } catch (err) {
-      setError('Failed to send message. Please try again.');
+      setError('We could not send the mail right now. Please use WhatsApp or try again after deployment on Netlify.');
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -614,6 +675,9 @@ function Contact() {
                     <UserCheck size={32} />
                   </div>
                   <h3 className="text-2xl font-fancy text-charcoal">{content.contact.fields.success}</h3>
+                  <p className="text-sm text-charcoal/60 max-w-md leading-relaxed">
+                    Your message was sent through the site mail form. WhatsApp is still available for a quick chat.
+                  </p>
                 </motion.div>
               ) : (
                 <form className="space-y-6" onSubmit={handleSubmit}>
@@ -626,6 +690,7 @@ function Contact() {
                       type="text" 
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      autoComplete="name"
                       className="w-full bg-white border border-gray-200 px-6 py-4 outline-none focus:border-gold transition-colors rounded-none" 
                     />
                   </div>
@@ -639,6 +704,7 @@ function Contact() {
                         type="email" 
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        autoComplete="email"
                         className="w-full bg-white border border-gray-200 px-6 py-4 outline-none focus:border-gold transition-colors rounded-none" 
                       />
                     </div>
@@ -651,6 +717,7 @@ function Contact() {
                         type="tel" 
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        autoComplete="tel"
                         className="w-full bg-white border border-gray-200 px-6 py-4 outline-none focus:border-gold transition-colors rounded-none" 
                       />
                     </div>
@@ -664,16 +731,28 @@ function Contact() {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      autoComplete="off"
                       className="w-full bg-white border border-gray-200 px-6 py-4 outline-none focus:border-gold transition-colors rounded-none resize-none" 
                     />
                   </div>
                   {error && <p className="text-red-500 text-sm">{error}</p>}
-                  <button 
-                    disabled={isSubmitting}
-                    className={`w-full bg-charcoal text-white py-5 px-8 font-medium tracking-wide transition-all duration-300 active:scale-95 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gold'}`}
-                  >
-                    {isSubmitting ? '...' : content.contact.fields.submit}
-                  </button>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full bg-charcoal text-white py-5 px-8 font-medium tracking-wide transition-all duration-300 active:scale-95 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gold'}`}
+                    >
+                      {isSubmitting ? '...' : mailSubmitLabel}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={openWhatsAppQuickSend}
+                      className="w-full flex items-center justify-center gap-2 border border-emerald-300/60 bg-emerald-50 text-emerald-800 py-5 px-8 font-medium tracking-wide transition-all duration-300 hover:bg-emerald-100 active:scale-95"
+                    >
+                      <MessageCircle size={18} />
+                      {whatsappQuickSendLabel}
+                    </button>
+                  </div>
                 </form>
               )}
             </motion.div>

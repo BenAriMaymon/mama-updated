@@ -9,6 +9,14 @@
   </head>
   <body class="bg-offwhite">
     <div id="root"></div>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+      <input type="text" name="language" />
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
