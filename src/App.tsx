@@ -585,15 +585,46 @@ function Contact() {
     }
   };
 
-  const buildNetlifyFormBody = () => new URLSearchParams({
-    'form-name': 'contact',
-    'bot-field': '',
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-    language,
-  }).toString();
+  const submitNetlifyForm = () => {
+    const submitFrame = document.createElement('iframe');
+    submitFrame.name = 'netlify-contact-submit';
+    submitFrame.style.display = 'none';
+    document.body.appendChild(submitFrame);
+
+    const form = document.createElement('form');
+    form.name = 'contact';
+    form.method = 'POST';
+    form.action = '/';
+    form.target = submitFrame.name;
+    form.setAttribute('data-netlify', 'true');
+    form.setAttribute('netlify-honeypot', 'bot-field');
+
+    const fields = [
+      ['form-name', 'contact'],
+      ['bot-field', ''],
+      ['name', formData.name],
+      ['email', formData.email],
+      ['phone', formData.phone],
+      ['message', formData.message],
+      ['language', language],
+    ] as const;
+
+    fields.forEach(([fieldName, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = fieldName;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    window.setTimeout(() => {
+      form.remove();
+      submitFrame.remove();
+    }, 1000);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -601,15 +632,7 @@ function Contact() {
     setError(null);
 
     try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: buildNetlifyFormBody(),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit contact form');
-      }
+      submitNetlifyForm();
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -681,6 +704,8 @@ function Contact() {
                 </motion.div>
               ) : (
                 <form className="space-y-6" onSubmit={handleSubmit}>
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" value="" />
                   <div>
                     <label className="block text-xs uppercase tracking-widest text-charcoal/40 font-bold mb-2">
                       {content.contact.fields.name}
