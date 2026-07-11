@@ -130,7 +130,7 @@ export const contentData: Record<Language, Content> = {
       wordCount: 'מספר מילים במסמך:',
       totalExclVat: 'סה"כ (לפני מע"מ):',
       totalInclVat: 'סה"כ (כולל מע"מ):',
-      vatLabel: 'מע"מ (17%):',
+      vatLabel: 'מע"מ (18%):',
       description: 'הערה: התעריפים נקבעים על פי תקנות הנוטריונים ומתעדכנים מעת לעת. המחיר המוצג הינו להמחשה בלבד ומתייחס לאישור הנוטריוני עצמו. עלות התרגום המקצועי עשויה להשתנות בהתאם לסוג המסמך.',
     },
     footer: { rights: '© כל הזכויות שמורות למשרד עו"ד קריסטינה פוליצר מימון' },
@@ -146,7 +146,6 @@ export const contentData: Record<Language, Content> = {
       title: 'About the Office',
       content: [
         'Attorney and Notary Krisztina Politzer Maymon was born in Hungary, completed her law studies (LL.B. and LL.M.) in Hungary and the USA, and is one of the few lawyers in israel who is fluent in the Hungarian language.',
-        'The shared story of Krisztina and Hadar Maymon began at the Faculty of Law in Budapest, Hungary in the late 1990`s, which then first opened its doors to the West. Krisztina came from a family of lawyers—both her parents were still students when she was born, so from her first day she already `studied` the foundations of jurisprudence. Hadar, later her husband, arrived in 1990 from Israel. He was involved in real estate and international trade alongside his studies, participating in the vibrant economic activity that characterized the entry of many Western international companies into Eastern Europe.',
         'After completing her master\'s degree in Hungary and the United States, Attorney Politzer Maymon moved to Israel, passed her internship and Bar exams. Upon certification, she worked in leading civil and commercial law firms, with a focus on labor law, and later qualified as a public notary. Today, alongside providing legal advice and opinions on Hungarian law to courts, Attorney Politzer Maymon serves as a court-appointed expert and advises law firms, including in complex and class-action lawsuits. She is also certified to provide signature verification and Apostille for the legal documents she translates.',
         'Attorney Politzer Maymon is a certified mediator by the Bar Association and serves as a public representative at the Tel Aviv-Yafo Labor Court.',
       ],
@@ -160,7 +159,10 @@ export const contentData: Record<Language, Content> = {
           description: 'Inherited assets in Hungary?',
           content: [
             'Our office handles probate or inheritance proceedings in Hungary, delivering the estate to Israeli heirs and transferring estate funds to Israel. As part of the service, our office collaborates with a long-standing and respected local Hungarian lawyer who specializes in inheritance proceedings.',
-            'Attorney Krisztina Politzer Maymon has a significant advantage in this field given that she holds a doctorate in law from a Hungarian university, speaks Hungarian at a native level, and is proficient in the legal and administrative procedures in the country.',
+            'Attorney Krisztina Politzer Maymon has a si
+            
+            
+            nificant advantage in this field given that she holds a doctorate in law from a Hungarian university, speaks Hungarian at a native level, and is proficient in the legal and administrative procedures in the country.',
             'As part of the comprehensive care, our office provides for the sale of real estate and transfer of sale funds to Israel, following up with financial institutions in Hungary, and ensuring the transfer of funds to Israel as needed.',
           ],
         },
@@ -195,7 +197,7 @@ export const contentData: Record<Language, Content> = {
         {
           id: 'notary',
           title: 'Notary Services',
-          description: 'Full notary services by Krisztina Politzer Maymon.',
+          description: 'Full notary services by Krisztina  Maymon.',
           content: [
             'Our office provides full notary services including: signature verification (Hungarian, English, Hebrew), notary translations, affidavits, life certificates, and apostille.',
           ],
@@ -227,7 +229,7 @@ export const contentData: Record<Language, Content> = {
       wordCount: 'Number of words in document:',
       totalExclVat: 'Total (Excl. VAT):',
       totalInclVat: 'Total (Incl. VAT):',
-      vatLabel: 'VAT (17%):',
+      vatLabel: 'VAT (18%):',
       description: 'Note: Rates are set by Notary Regulations and updated periodically. The displayed price is for illustration purposes and refers to the notary certification itself. The cost of professional translation may vary depending on the document type.',
     },
     footer: { rights: '© All rights reserved to Krisztina Politzer Maymon Law Firm' },
@@ -235,14 +237,14 @@ export const contentData: Record<Language, Content> = {
   hu: {
     nav: { home: 'Kezdőlap', about: 'Irodáról', services: 'Szolgáltatások', contact: 'Kapcsolat' },
     hero: {
-      title: 'Politzer Maymon Krisztina – Ügyvéd és Izraeli Közjegyző',
-      subtitle: '**Magyar Jog Szakértő** | 🇮🇱 Izrael ↔ Magyarország 🇭🇺',
+      title: 'Politzer Maymon Krisztina – IZRAELI ÜGYVÉD ÉS KÖZJEGYZŐ',
+      subtitle: '**Izraeli szakjogász** | 🇮🇱 Izrael ↔ Magyarország 🇭🇺',
       cta: 'Kapcsolatfelvétel',
     },
     about: {
       title: 'Az Irodáról',
       content: [
-        'Politzer Maymon Krisztina izraeli ügyvéd és közjegyző Magyarországon született, jogi tanulmányait (LL.B. és LL.M.) Magyarországon és az USA-ban folytatta. Azon kevés izraeli szakemberek egyike, aki magyarulnyelven  is ad jogi szolgáltatást Izraelben.',
+        'Politzer Maymon Krisztina izraeli ügyvéd és közjegyző Magyarországon született, jogi tanulmányait (LL.B. és LL.M.) Magyarországon és az USA-ban folytatta. Azon kevés izraeli szakemberek egyike, aki magyarnyelven  is ad jogi szolgáltatást Izraelben.',
         'Ügyvédi irodánk izraeli jogi és közjegyzői szolgáltatásokat nyújt, ezen belül meghatalmazások elkészítését, illetve hitelesítését, közjegyzői aláírás hitelesítését szerződésekhez, végrendeletekhez, kiskorúak külföldi utazási engedélyeihez, valamint Magyarországon készült dokumentumok hiteles fordítását magyarról/angolról héber nyelvre.',
         'Irodánk megfelelő magyar nyelvismerettel és jogi szakképesítéssel rendelkezik, mivel Dr. Politzer Maymon Krisztina 1998 óta ügyvédként,  2018 óta bejegyzett izraeli közjegyzőként működik Izraelben, jogi diplomáját az ELTE Állam- és Jogtudományi karán szerezte.',
       ],
@@ -290,7 +292,7 @@ export const contentData: Record<Language, Content> = {
       wordCount: 'Szavak száma a dokumentumban:',
       totalExclVat: 'Összesen (ÁFA nélkül):',
       totalInclVat: 'Összesen (ÁFÁ-val):',
-      vatLabel: 'ÁFA (17%):',
+      vatLabel: 'ÁFA (18%):',
       description: 'Megjegyzés: A díjakat közjegyzői rendeletek határozzák meg és időszakonként frissülnek. A kijelzett ár tájékoztató jellegű, és a közjegyzői hitelesítésre vonatkozik. A szakfordítás költsége a dokumentum típusától függően változhat.',
     },
     footer: { rights: '© Minden jog fenntartva – Politzer Maymon Krisztina Ügyvéדי Irodája' },
