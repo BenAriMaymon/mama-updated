@@ -241,7 +241,7 @@ export const contentData: Record<Language, Content> = {
     about: {
       title: 'Az Irodáról',
       content: [
-        'Politzer Maymon Krisztina izraeli ügyvéd és közjegyző Magyarországon született, jogi tanulmányait (LL.B. és LL.M.) Magyarországon és az USA-ban folytatta. Azon kevés izraeli szakemberek egyike, aki magyarnyelven  is ad jogi szolgáltatást Izraelben.',
+        'Politzer Maymon Krisztina izraeli ügyvéd és közjegyző Magyarországon született, jogi tanulmányait (LL.B. és LL.M.) Magyarországon és az USA-ban folytatta. Azon kevés izraeli szakemberek egyike, aki magyar nyelven  is ad jogi szolgáltatást Izraelben.',
         'Ügyvédi irodánk izraeli jogi és közjegyzői szolgáltatásokat nyújt, ezen belül meghatalmazások elkészítését, illetve hitelesítését, közjegyzői aláírás hitelesítését szerződésekhez, végrendeletekhez, kiskorúak külföldi utazási engedélyeihez, valamint Magyarországon készült dokumentumok hiteles fordítását magyarról/angolról héber nyelvre.',
         'Irodánk megfelelő magyar nyelvismerettel és jogi szakképesítéssel rendelkezik, mivel Dr. Politzer Maymon Krisztina 1998 óta ügyvédként,  2018 óta bejegyzett izraeli közjegyzőként működik Izraelben, jogi diplomáját az ELTE Állam- és Jogtudományi karán szerezte.',
       ],
