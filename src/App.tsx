@@ -464,7 +464,7 @@ function Calculator() {
   };
 
   const subtotal = calculateTotal(wordCount);
-  const vat = subtotal * 0.17;
+  const vat = subtotal * 0.18;
   const grandTotal = subtotal + vat;
 
   return (
