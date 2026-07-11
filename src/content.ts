@@ -159,10 +159,7 @@ export const contentData: Record<Language, Content> = {
           description: 'Inherited assets in Hungary?',
           content: [
             'Our office handles probate or inheritance proceedings in Hungary, delivering the estate to Israeli heirs and transferring estate funds to Israel. As part of the service, our office collaborates with a long-standing and respected local Hungarian lawyer who specializes in inheritance proceedings.',
-            'Attorney Krisztina Politzer Maymon has a si
-            
-            
-            nificant advantage in this field given that she holds a doctorate in law from a Hungarian university, speaks Hungarian at a native level, and is proficient in the legal and administrative procedures in the country.',
+            'Attorney Krisztina Politzer Maymon has a sinificant advantage in this field given that she holds a doctorate in law from a Hungarian university, speaks Hungarian at a native level, and is proficient in the legal and administrative procedures in the country.',
             'As part of the comprehensive care, our office provides for the sale of real estate and transfer of sale funds to Israel, following up with financial institutions in Hungary, and ensuring the transfer of funds to Israel as needed.',
           ],
         },
